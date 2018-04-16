@@ -1,7 +1,8 @@
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
-const isDev = process.env.NODE_ENV === 'development'
 const webpack = require('webpack')
+
+const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
     target: 'web',
@@ -45,7 +46,7 @@ const config = {
                         loader: 'url-loader',
                         options: {
                             limit: 1024,
-                            name: '[name]-a.[ext]'
+                            name: '[name]-output.[ext]'
                         }
                     }
                 ]
@@ -74,6 +75,10 @@ if (isDev) {
         },
         hot:true
     }
+    config.plugins.push(
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
+    )
    
 }
 
